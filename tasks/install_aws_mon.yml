@@ -11,6 +11,10 @@
   unarchive: src=/tmp/CloudWatchMonitoringScripts.zip dest=/tmp/ copy=no
   when: get_script is changed
 
+- name: Remove any previous install directory
+  file: path={{cw_install_dir}} state=absent
+  when: get_script is changed
+
 - name: Move to install directory
   command: mv /tmp/aws-scripts-mon {{cw_install_dir}}
   when: get_script is changed
